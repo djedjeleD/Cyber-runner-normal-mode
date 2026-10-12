@@ -1527,6 +1527,31 @@ function blockGameForUpdate() {
 
 // Lancement de la vérification dès l'ouverture du jeu
 window.onload = checkAppVersion;
+  // Fonction pour demander l'autorisation des notifications
+function demanderPermissionNotifications() {
+    // Vérifie si le navigateur/appareil supporte les notifications
+    if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                console.log("Notifications autorisées ! 🎉");
+                // On peut envoyer une première notification de bienvenue !
+                envoyerNotificationBienvenue();
+            } else {
+                console.log("Notifications refusées ou fermées.");
+            }
+        });
+    }
+}
+
+// Exemple de notification locale envoyée au joueur
+function envoyerNotificationBienvenue() {
+    if (Notification.permission === "granted") {
+        new Notification("CYBER-RUNNER 2026 🚀", {
+            body: "Protocole d'alerte activé ! La 1ère place du classement t'attend... 😏",
+            icon: "icône.png" // L'icône de ton jeu
+        });
+    }
+}
         
     </script>
 </body>
